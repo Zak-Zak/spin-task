@@ -20,6 +20,26 @@
         #balance {
             font-weight: bold;
         }
+
+        #order-book {
+            margin-top: 48px;
+            border-collapse: collapse;
+            background-color: lightgray;
+        }
+
+        #order-book tr.ask {
+            background-color: #ff8080;
+        }
+
+        #order-book tr.bid {
+            background-color: #85e085;
+        }
+
+        #order-book th,
+        #order-book td {
+            padding: 8px 16px;
+            border: 1px solid darkgray;
+        }
     </style>
 </head>
 <body>
@@ -28,9 +48,27 @@
         <button id="sign-button">Sign in</button>
     </div>
 
-    <div id="balance-wrapper" class="contentBlock">
-        <label>Wallet ballance:</label>
+    <div id="balance-wrapper" class="contentBlock hidden">
+        <label for="#balance">Wallet ballance:</label>
         <span id="balance"></span>
+    </div>
+
+    <div id="market-wrapper" class="contentBlock hidden">
+        <label for="#market-select">Markets:</label>
+        <select id="market-select"></select>
+
+        <div>
+            <table id="order-book">
+                <thead>
+                    <th>Price (USDC)</th>
+                    <th>Size (NEAR)</th>
+                    <th>Total</th>
+                </thead>
+                <tbody id="order-book-body">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
