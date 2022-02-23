@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .contentBlock {
+            margin-bottom: 24px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #username {
+            margin-right: 12px;
+        }
+
+        #balance {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="contentBlock">
+        <input id="username" type="text" value=""/>.testnet
+        <button id="sign-button">Sign in</button>
+    </div>
+
+    <div id="balance-wrapper" class="contentBlock">
+        <label>Wallet ballance:</label>
+        <span id="balance"></span>
+    </div>
 </body>
 </html>
