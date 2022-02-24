@@ -89,9 +89,9 @@ const createRow = (order: FormattedOrder, className?: string) => {
     return row;
 }
 
-const createCell = (text: string) => {
+const createCell = (value: number) => {
     const cell = document.createElement('td');
-    cell.innerText = text;
+    cell.innerText = value.toFixed(4);
 
     return cell;
 }

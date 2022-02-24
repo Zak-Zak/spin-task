@@ -20,9 +20,9 @@ export const getTableData = (orders: GetOrdersResponse): OrdersTableData => ({
 });
 
 const getFormattedOrder = (order: Order): FormattedOrder => {
-    const price = getFormattedFixedString(order.price);
-    const quantity = getFormattedFixedString(order.quantity);
-    const total = (Number(price) * Number(quantity)).toFixed(4);
+    const price = getNearFormattedNumber(order.price);
+    const quantity = getNearFormattedNumber(order.quantity);
+    const total = price * quantity;
 
     return {
         price,
@@ -31,10 +31,10 @@ const getFormattedOrder = (order: Order): FormattedOrder => {
     };
 }
 
-const getFormattedFixedString = (x: number): string => (
-    Number(
-        formatNearAmount(BigInt(x).toString()).replace(',', '')
-    ).toFixed(4)
+const getNearFormattedNumber = (x: number): number => (
+    Number(formatNearAmount(BigInt(x).toString()).replace(',', ''))
 )
 
-const sortFormattedOrders = ({ price: price1 }: FormattedOrder, { price: price2 }: FormattedOrder) => price1 < price2 ? 1 : -1;
+const sortFormattedOrders = ({ price: price1 }: FormattedOrder, { price: price2 }: FormattedOrder) => (
+    Number(price1) < Number(price2) ? 1 : -1
+);

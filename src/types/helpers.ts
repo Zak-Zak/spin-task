@@ -4,9 +4,9 @@ export type Option = {
 };
 
 export type FormattedOrder = {
-    price: string;
-    quantity: string;
-    total: string;
+    price: number;
+    quantity: number;
+    total: number;
 }
 
 export type OrdersTableData = {
