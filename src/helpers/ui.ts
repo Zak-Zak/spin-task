@@ -1,49 +1,24 @@
 import { FormattedOrder, Option, OrdersTableData } from "../types/helpers";
 
 export const signButton = document.getElementById('sign-button') as HTMLButtonElement;
-export const userNameInput = document.getElementById('username') as HTMLInputElement;
-export const balanceWrapper = document.getElementById('balance-wrapper');
+export const contentWrapper = document.getElementById('content-wrapper');
+export const userNameParagraph = document.getElementById('username') as HTMLSpanElement;
 export const balanceElement = document.getElementById('balance') as HTMLSpanElement;
-export const marketWrapper = document.getElementById('market-wrapper');
 export const marketSelect = document.getElementById('market-select') as HTMLSelectElement;
 
-export const setDisabled = (el: HTMLElement, disabled = true) => {
-    if (disabled) {  
-        el.setAttribute('disabled', '');
-    } else {
-        el.removeAttribute('disabled');
-    }
-};
-
-export const prepareSignBlock = (accountId?: string) => {
+export const fillContent = (accountId: string, balance: string) => {
     if (accountId) {
-        userNameInput.value = accountId.split('.')[0];
-        setDisabled(userNameInput);
-
         signButton.innerText = 'Sign out';
-    } else if (!userNameInput.value) {
-        setDisabled(signButton);
+        userNameParagraph.innerText = accountId;
+        setContentVisibility(true);
+
+        if(balance) {
+            balanceElement.innerText = balance || '';
+        }
     }
 };
-
-export const prepareBalanceBlock = (accountId?: string, balance?: string) => {
-    if (accountId) {
-        balanceWrapper?.classList.remove('hidden');
-        balanceElement.innerText = balance || '';
-    }
-}
-
-export const handleUserNameInputChange = () => {
-    if (userNameInput.value) {
-        setDisabled(signButton, false);
-    } else {
-        setDisabled(signButton);
-    }
-}
 
 export const prepareMarketsBlock = (options: Option[]) => {
-    marketWrapper?.classList.remove('hidden');
-
     options.forEach(({ value, text }) => {
         const optionElement = document.createElement("option");
         optionElement.setAttribute('value', value);
@@ -53,9 +28,12 @@ export const prepareMarketsBlock = (options: Option[]) => {
     });
 }
 
-export const hideContent = () => {
-    balanceWrapper?.classList.add('hidden');
-    marketWrapper?.classList.add('hidden');
+export const setContentVisibility = (visible: boolean) => {
+    if (visible) {
+        contentWrapper?.classList.remove('hidden');
+    } else {
+        contentWrapper?.classList.add('hidden');
+    }
 }
 
 /*-----------Order book----------*/

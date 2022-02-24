@@ -17,10 +17,7 @@
             display: none;
         }
 
-        #username + span {
-            margin-right: 12px;
-        }
-
+        #username,
         #balance {
             font-weight: bold;
         }
@@ -49,30 +46,36 @@
 </head>
 <body>
     <div class="contentBlock">
-        <input id="username" type="text" value=""/><span>.testnet</span>
         <button id="sign-button">Sign in</button>
     </div>
 
-    <div id="balance-wrapper" class="contentBlock hidden">
-        <label for="#balance">Wallet ballance:</label>
-        <span id="balance"></span>
-    </div>
+    <div id="content-wrapper" class="hidden">
+        <div id="username-wrapper" class="contentBlock">
+            <label for="#balance">Username:</label>
+            <span id="username"></span>
+        </div>
 
-    <div id="market-wrapper" class="contentBlock hidden">
-        <label for="#market-select">Markets:</label>
-        <select id="market-select"></select>
+        <div id="balance-wrapper" class="contentBlock">
+            <label for="#balance">Wallet ballance:</label>
+            <span id="balance"></span>
+        </div>
 
-        <div>
-            <table id="order-book">
-                <thead>
-                    <th>Price (USDC)</th>
-                    <th>Size (NEAR)</th>
-                    <th>Total</th>
-                </thead>
-                <tbody id="order-book-body">
+        <div id="market-wrapper" class="contentBlock">
+            <label for="#market-select">Markets:</label>
+            <select id="market-select"></select>
 
-                </tbody>
-            </table>
+            <div>
+                <table id="order-book">
+                    <thead>
+                        <th>Price (USDC)</th>
+                        <th>Size (NEAR)</th>
+                        <th>Total</th>
+                    </thead>
+                    <tbody id="order-book-body">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

@@ -11,13 +11,9 @@ import {
 } from './near';
 import { 
     signButton,
-    userNameInput,
-    setDisabled,
-    prepareSignBlock,
-    handleUserNameInputChange,
-    prepareBalanceBlock,
+    fillContent,
     prepareMarketsBlock,
-    hideContent,
+    setContentVisibility,
     marketSelect,
     refillOrderBook
 } from './helpers/ui';
@@ -27,13 +23,11 @@ const main = async () => {
     await init();
 
     const info = await getAccountInfo();
-    const accountId = info?.account.accountId;
-    const total = info?.balance.total || '';
-
-    prepareSignBlock(accountId);
-    prepareBalanceBlock(accountId, formatNearAmount(total));
+    let accountId = info?.account.accountId;
 
     if (accountId) {
+        fillContent(accountId, formatNearAmount(info?.balance.total || ''));
+
         initContract();
 
         const markets = await getMarkets();
@@ -46,22 +40,16 @@ const main = async () => {
         }
     }
 
-    userNameInput?.addEventListener('input', handleUserNameInputChange);
     signButton?.addEventListener('click', async function() {
         if (accountId) {
             await signOut();
+            accountId = '';
 
-            hideContent();
-            setDisabled(this);
-            setDisabled(userNameInput, false);
-            this.innerText = 'Sign in'
-            userNameInput.value = '';            
+            setContentVisibility(false);
+
+            this.innerText = 'Sign in'          
         } else {
-            setDisabled(this);
-
-            await signIn(userNameInput?.value);
-
-            setDisabled(this, false);
+            await signIn();
         }
     });
     marketSelect.addEventListener('change', async function () {

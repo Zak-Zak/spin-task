@@ -35,9 +35,9 @@ export const getAccountInfo = async (): Promise<AccountWithBalance | null> => {
     return null;
 };
 
-export const signIn = async (userName: string) => {
+export const signIn = async () => {
     if (!wallet.isSignedIn()) {
-        return await wallet.requestSignIn(`${userName}.${networkId}`);
+        return await wallet.requestSignIn();
     }
 };
 
